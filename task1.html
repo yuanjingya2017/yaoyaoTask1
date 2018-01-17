@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<label for="hello">名称</label>
+<div style="position: relative;display: inline-block;height: 60px;width: 200px;">
+    <input type="text" id="hello" placeholder="请输入字符" />
+    <p id="notice" style="position: absolute;bottom: 0;left: 0;">必填，长度为4~16个字符</p>
+</div>
+<script>
+    var hello = document.querySelector('#hello');
+    var notice = document.querySelector('#notice');
+    hello.addEventListener('change',function (e) {
+        var value = e.target.value;
+        var len = value.length;
+        var hanzi = value.match(/[^\x00-\x80]/g);
+        if(hanzi){
+            len = hanzi.length + value.length;
+        }
+        alert(len)
+        if(len<4){
+            notice.innerHTML = '请输入字符大于4个';
+        }
+        else if(len>16){
+            notice.innerHTML = '请输入字符小于16个';
+        }
+        else {
+            notice.innerHTML = '格式正确';
+        }
+    });
+</script>
+</body>
+</html>
