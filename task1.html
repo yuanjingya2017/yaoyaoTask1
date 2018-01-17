@@ -5,15 +5,37 @@
     <title>Title</title>
 </head>
 <body>
-<label for="hello">名称</label>
+<label for="name1">名称</label>
 <div style="position: relative;display: inline-block;height: 60px;width: 200px;">
-    <input type="text" id="hello" placeholder="请输入字符" />
-    <p id="notice" style="position: absolute;bottom: 0;left: 0;">必填，长度为4~16个字符</p>
+    <input type="text" id="name1" placeholder="请输入字符" />
+    <p id="notice1" style="position: absolute;bottom: 0;left: 0; display:none;">必填，长度为4~16个字符</p>
+</div>
+<label for="secret">密码</label>
+<div style="position: relative;display: inline-block;height: 60px;width: 200px;">
+    <input type="password" id="secret" placeholder="请输入密码" />
+    <p id="notice2" style="position: absolute;bottom: 0;left: 0; display:none;">请输入密码</p>
+</div>
+<label for="secret2">确认密码</label>
+<div style="position: relative;display: inline-block;height: 60px;width: 200px;">
+    <input type="password" id="secret2" placeholder="请再次输入密码" />
+    <p id="notice3" style="position: absolute;bottom: 0;left: 0; display:none;">再次输入密码</p>
+</div>
+<label for="mail">邮箱</label>
+<div style="position: relative;display: inline-block;height: 60px;width: 200px;">
+    <input type="text" id="mail" placeholder="请输入邮箱" />
+    <p id="notice4" style="position: absolute;bottom: 0;left: 0; display:none;">请输入邮箱</p>
+</div>
+<label for="tel">手机</label>
+<div style="position: relative;display: inline-block;height: 60px;width: 200px;">
+    <input type="text" id="tel" placeholder="请输入手机号码" />
+    <p id="notice5" style="position: absolute;bottom: 0;left: 0; display:none;">请输入手机号码</p>
 </div>
 <script>
-    var hello = document.querySelector('#hello');
-    var notice = document.querySelector('#notice');
-    hello.addEventListener('change',function (e) {
+    var hello = document.querySelector('#name1');
+    var notice1 = document.querySelector('#notice1');
+    hello.onfocus = function(){notice1.style.display="block";}
+    hello.onblur = function(e){
+        notice1.style.display="none";
         var value = e.target.value;
         var len = value.length;
         var hanzi = value.match(/[^\x00-\x80]/g);
@@ -22,15 +44,88 @@
         }
         alert(len)
         if(len<4){
-            notice.innerHTML = '请输入字符大于4个';
+            notice1.innerHTML = '请输入字符大于4个';
         }
         else if(len>16){
-            notice.innerHTML = '请输入字符小于16个';
+            notice1.innerHTML = '请输入字符小于16个';
         }
         else {
-            notice.innerHTML = '格式正确';
+            notice1.innerHTML = '格式正确';
         }
-    });
+    }
+    
+    var secret = document.querySelector('#secret');
+    var notice2 = document.querySelector('#notice2');
+    secret.onfocus = function(){notice2.style.display="block";}
+    secret.onblur = function(e){
+        notice2.style.display="none";
+        var value = e.target.value;
+        var len = value.length;
+        if(len>0){
+            notice2.innerHTML = '密码可用';
+        }
+        else{
+            notice2.innerHTML = '请输入密码';
+        }
+    }
+    
+    var secret2 = document.querySelector('#secret2');
+    var notice3 = document.querySelector('#notice3');
+    secret2.onfocus = function(){notice3.style.display="block";}
+    secret2.onblur = function(e){
+        notice3.style.display="none";
+        var value = e.target.value;
+        var len = value.length;
+        if(len>0){
+            if(notice3.innerHTML == notice2.innerHTML){
+                notice3.innerHTML = '两次密码一致';
+            }
+            else{
+                notice3.innerHTML = '两次密码不一致';
+            }
+        }
+        else{
+            notice3.innerHTML = '请再次输入密码';
+        }
+    }
+    
+    var mail = document.querySelector('#mail');
+    var notice4 = document.querySelector('#notice4');
+    mail.onfocus = function(){notice4.style.display="block";}
+    mail.onblur = function(){
+        notice4.style.display="none";
+        var value = e.target.value;
+        var len = value.length;
+        if(len>0){
+            if(value.indexOf('@')!=-1){
+                notice4.innerHTML = '邮箱格式正确';
+            }
+            else{
+                notice4.innerHTML = '邮箱格式不正确';
+            }
+        }
+        else{
+            notice4.innerHTML = '请输入邮箱';
+        }
+    }
+    
+    var tel = document.querySelector('#tel');
+    var notice5 = document.querySelector('#notice5');
+    tel.onfocus = function(){notice5.style.display="block";}
+    tel.onblur = function(){
+        notice5.style.display="none";
+        var value = e.target.value;
+        var len = value.length;
+        if(len>0){
+            if(len==11){
+                notice5.innerHTML = '手机号码正确';
+            }
+        }
+        else{
+             notice5.innerHTML = '请输入手机号码';
+        }
+    }
+  
 </script>
 </body>
 </html>
