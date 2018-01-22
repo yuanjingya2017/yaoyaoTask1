@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<style>
+body{
+	padding:0;
+	margin:0;
+	font-size:12px;
+	font-weight: bold;
+}
+div{
+	margin:20px auto;
+	width:50%;
+	height:200px;
+}
+form div:first-child{
+	justify-content:center;
+	display:flex;
+	height:40px;
+}
+form div{
+	height:40px;
+}
+form input[type="text"]{
+	width:200px;
+}
+form select{
+	margin-left:15px;
+	width:80px;
+	height:16px;
+	font-size:5px;
+}
+form div:last-child{
+	display:none;
+}
+</style>
+</head>
+<body>
+<div>
+	 <form>
+	 	<div>
+		 	<input id="1" type="radio" name="student" checked="checked">
+		 	<label for="1">在校生</label>
+		 	<input id="2" type="radio" name="student">
+		 	<label for="2">非在校生</label>
+	 	</div>
+	 	<div class="js-choose1">
+	 		<label for="3">学校</label>
+	 		<select class="groups" name="groups">
+				    <option>北京</option>
+				    <option>上海</option>
+			</select>
+	 		<select class="school" name="groups">
+	 				<option>北京大学</option>
+				    <option>清华大学</option>
+				    <option>中国人民大学</option>
+				    <option>北京师范大学</option>
+			</select>
+			<select class="school" style="display: none;" name="groups">
+				<option>复旦大学</option>
+				<option>上海大学</option>
+				<option>华中师范大学</option>
+			</select>
+	 	</div>
+	 	<div class="js-choose2">
+	 		<label for="4">就业单位</label>
+	 		<input id="4" type="text">
+	 	</div>
+	 </form>
+</div>
+<script>
+	var check1 = document.getElementById('1');
+	var check2 = document.getElementById('2');
+	var school = document.getElementsByClassName('school');
+	var groups = document.getElementsByClassName('groups')[0];
+	var jschoose1 = document.getElementsByClassName('js-choose1')[0];
+	var jschoose2 = document.getElementsByClassName('js-choose2')[0];
+    check2.onclick = function () {
+        if(check2.checked){
+            jschoose1.style.display = 'none';
+            jschoose2.style.display = 'block';
+        }
+    };
+    check1.onclick = function () {
+        if(check1.checked){
+            jschoose2.style.display = 'none';
+            jschoose1.style.display = 'block';
+        }
+    };
+    groups.onchange = function (e) {
+        var city = e.target.value;
+        for(var i=0;i<school.length;i++){
+            school[i].style.display = 'none';
+		}
+		console.log(city)
+		switch(city){
+			case '北京':school[0].style.display = 'inline-block';
+			break;
+			case '上海':school[1].style.display = 'inline-block';
+			break;
+        }
+    };
+</script>
+</body>
+</html>
