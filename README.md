@@ -5,3 +5,4 @@ task1查看效果https://yuanjingya2017.github.io/yaoyaoTask1/task1.html
 
 
 yaoyao3待修改，需要不依赖判断文字
+dom结构参考https://github.com/DogIdea/baiduife/blob/master/zonghe3.html
