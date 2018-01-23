@@ -10,28 +10,28 @@
             background: url("pane.jpg") no-repeat;
             height: 400px;
         }
-        .obj1{
+        .obj0{
             position: absolute;
             width: 30px;
             height: 24px;
             border-top: 6px solid blue;
             background-color: red;"
         }
-        .obj2{
+        .obj1{
             position: absolute;
             width: 24px;
             height: 30px;
             border-right: 6px solid blue;
             background-color: red;"
         }
-        .obj3{
+        .obj2{
             position: absolute;
             width: 30px;
             height: 24px;
             border-bottom: 6px solid blue;
             background-color: red;"
         }
-        .obj4{
+        .obj3{
             position: absolute;
             width: 24px;
             height: 30px;
@@ -63,7 +63,7 @@
 </head>
 <body>
 <div class="bgline">
-    <div class="obj2 js-obj"
+    <div class="obj1 js-obj"
             style="
             top: 9px;
             left: 18px;"></div>
@@ -75,8 +75,8 @@
     var TURN_LEFT180 = 'turnleft180';
     var TURN_RIGHT = 'turnright90';
     var OBJ = 'obj';
-    var TEMP = 'obj2';
-    var divhead = 2;
+    var TEMP = 'obj1';
+    var divhead = 1;
     var x = 30;
     var px = 'px';
     var btn = document.getElementById('controller');
@@ -119,18 +119,21 @@
             var before = OBJ+divhead;
             divhead -= 1;
             var after = OBJ+(4+divhead)%4;
+            divhead = (4+divhead)%4;
             div.className = div.className.replace(before,after);
         }
         else if(str.toUpperCase()=='TUNRIG'){
             var before = OBJ+divhead;
             divhead += 1;
             var after = OBJ+(4+divhead)%4;
+            divhead = (4+divhead)%4;
             div.className = div.className.replace(before,after);
         }
         else if(str.toUpperCase()=='TUNBAC'){
             var before = OBJ+divhead;
-            divhead -= 2;
+            divhead += 2;
             var after = OBJ+(4+divhead)%4;
+            divhead = (4+divhead)%4;
             div.className = div.className.replace(before,after);
         }
         else{
