@@ -95,14 +95,19 @@ form div:last-child{
         for(var i=0;i<school.length;i++){
             school[i].style.display = 'none';
 		}
-		console.log(city)
-		switch(city){
-			case '北京':school[0].style.display = 'inline-block';
-			break;
-			case '上海':school[1].style.display = 'inline-block';
-			break;
-        }
+        var index = getOptionIndex(city);
+        school[index].style.display = 'inline-block';
     };
+    function getOptionIndex(val) {
+        var child = groups.childNodes;
+        for(var i=0;i<child.length;i++){
+            if(child[i].nodeName=='OPTION'){
+                if(child[i].innerText==val){
+                    return Math.floor(i/2);
+				}
+			}
+		}
+    }
 </script>
 </body>
 </html>
