@@ -5,6 +5,87 @@
     <title>Title</title>
 </head>
 <body>
+<table id="table1">
+    <tr><th>姓名</th><th onclick="sortBy(chi)">语文</th><th onclick="sortBy(mat)">数学</th><th onclick="sortBy(eng)">英语</th><th onclick="sortBy(sum)">总分</th></tr>
+</table>
 
+<script>
+    var table1 = document.getElementById('table1');
+    var arr = [
+        {
+            'name':'小明',
+            'chinese':80,
+            'math':90,
+            'english':80,
+            'sum':240
+
+        },{
+            'name':'小红',
+
+            'chinese':90,
+            'math':60,
+            'english':90,
+            'sum':240
+
+        },{
+            'name':'小亮',
+
+            'chinese':60,
+            'math':100,
+            'english':70,
+            'sum':240
+
+        }
+    ];
+    function sortBy(type) {
+        switch(type){
+            case 'chi':
+            case 'mat':
+            case 'eng':
+            case 'sum':
+        }
+    }
+    function initTable(key) {
+        var data = arr.sort(by('chinese'));
+        console.log(data)
+        for(var i=0;i<data.length;i++){
+            var temp = '';
+            for(var j in data[i]){
+                if(typeof data[i][j]!='object'){
+                    temp = temp+'<td>'+data[i][j]+'</td>';
+                }
+                else{
+                    for(var k in data[i][j]){
+                        temp = temp+'<td>'+data[i][j][k]+'</td>';
+                    }
+                }
+            }
+            var tr = document.createElement('tr');
+            tr.innerHTML = temp;
+            table1.appendChild(tr);
+        }
+    }
+    function by (name){
+        return function(o, p){
+            var a, b;
+            if (typeof o === "object" && typeof p === "object" && o && p) {
+                a = o[name];
+                b = p[name];
+                if (a === b) {
+                    return 0;
+                }
+                if (typeof a === typeof b) {
+                    return a < b ? -1 : 1;
+                }
+                return typeof a < typeof b ? -1 : 1;
+            }
+            else {
+                throw ("error");
+            }
+        }
+    }
+    initTable('chi');
+</script>
 </body>
 </html>
+
