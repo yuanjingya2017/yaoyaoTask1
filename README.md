@@ -6,3 +6,7 @@ task1查看效果https://yuanjingya2017.github.io/yaoyaoTask1/task1.html
 
 yaoyao3待修改，需要不依赖判断文字
 dom结构参考https://github.com/DogIdea/baiduife/blob/master/zonghe3.html
+
+
+
+有能力的同学可以实现浮出层的拖拽移动浮出窗口位置以及拖拽边缘来放大缩小浮出窗口的功能
