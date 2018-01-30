@@ -64,18 +64,50 @@
             -o-transition: all 1s;
             transition: all 1s;
         }
-        .trans{
+        .transY{
+            -webkit-transition: top 1s;
+            -moz-transition: top 1s;
+            -ms-transition: top 1s;
+            -o-transition: top 1s;
+            transition: top 1s;
+        }
+        .transX{
+            -webkit-transition: left 1s;
+            -moz-transition: left 1s;
+            -ms-transition: left 1s;
+            -o-transition: left 1s;
+            transition: left 1s;
+        }
+        .rotate90{
             -webkit-transition: all 1s;
             -moz-transition: all 1s;
             -ms-transition: all 1s;
             -o-transition: all 1s;
             transition: all 1s;
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+        .rotate-90{
+            -webkit-transition: all 1s;
+            -moz-transition: all 1s;
+            -ms-transition: all 1s;
+            -o-transition: all 1s;
+            transition: all 1s;
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            transform: rotate(-90deg);
         }
     </style>
 </head>
 <body>
+<button onclick="changeR()">click</button>
 <div class="bgline">
-    <div class="obj1 trans js-obj"
+    <div class="obj1 js-obj"
             style="
             top: 9px;
             left: 18px;"></div>
@@ -83,6 +115,17 @@
 <input id="js-inputWord" placeholder="请输入命令"/>
 <button id="controller">执行</button>
 <script>
+    /*
+    *
+    * TRA LEF：向屏幕的左侧移动一格，方向不变
+    TRA TOP：向屏幕的上面移动一格，方向不变
+    TRA RIG：向屏幕的右侧移动一格，方向不变
+    TRA BOT：向屏幕的下面移动一格，方向不变
+    MOV LEF：方向转向屏幕左侧，并向屏幕的左侧移动一格
+    MOV TOP：方向转向屏幕上面，向屏幕的上面移动一格
+    MOV RIG：方向转向屏幕右侧，向屏幕的右侧移动一格
+    MOV BOT：方向转向屏幕下面，向屏幕的下面移动一格
+    * */
     var TURN_LEFT = 'turnleft90';
     var TURN_LEFT180 = 'turnleft180';
     var TURN_RIGHT = 'turnright90';
@@ -94,9 +137,7 @@
     var btn = document.getElementById('controller');
     var input = document.getElementById('js-inputWord');
     var div = document.getElementsByClassName('js-obj')[0];
-    btn.onclick = function () {
-        var str = input.value;
-        str = str.replace(' ','');
+    function go(str) {
         if(str.toUpperCase()=='GO'){
             if(divhead=='0'){
                 var curStyle = div.style;
@@ -127,6 +168,13 @@
                 curStyle.left = Number(left) - x+px;
             }
         }
+    }
+    btn.onclick = function () {
+        var str = input.value;
+        str = str.replace(' ','');
+        if(str.toUpperCase()=='GO'){
+            go(str);
+        }
         else if(str.toUpperCase()=='TUNLEF'){
             var before = OBJ+divhead;
             divhead -= 1;
@@ -148,9 +196,43 @@
             divhead = (4+divhead)%4;
             div.className = div.className.replace(before,after);
         }
+        else if(str.toUpperCase()=='MOVLEF'){
+            div.className +=' '+'rotate-90' ;
+            var before = OBJ+divhead;
+            divhead -= 1;
+            var after = OBJ+(4+divhead)%4;
+            divhead = (4+divhead)%4;
+            setTimeout(function () {
+                div.className = div.className.replace('rotate-90','');
+                div.className = div.className.replace(before,after);
+                go('GO');
+            },1000)
+        }
+        else if(str.toUpperCase()=='MOVRIG'){
+            div.className +=' '+'rotate90' ;
+            var before = OBJ+divhead;
+            divhead += 1;
+            var after = OBJ+(4+divhead)%4;
+            divhead = (4+divhead)%4;
+            setTimeout(function () {
+                div.className = div.className.replace('rotate90','');
+                div.className = div.className.replace(before,after);
+                go('GO');
+            },1000)
+        }
+        else if(str.toUpperCase()=='TRALEF'){
+            var curStyle = div.style;
+            var top = curStyle.top;
+            var left = curStyle.left;
+            left = left.replace('px','');
+            curStyle.left = Number(left) - x+px;
+        }
         else{
             alert('请输入正确指令');
         }
+    }
+    function changeR() {
+        div.className += ' '+'rotate90';
     }
 </script>
 </body>

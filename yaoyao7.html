@@ -6,7 +6,6 @@
 </head>
 <body>
 <table id="table1">
-    <tr><th>姓名</th><th onclick="sortBy('chi')">语文</th><th onclick="sortBy('mat')">数学</th><th onclick="sortBy('eng')">英语</th><th onclick="sortBy('sum')">总分</th></tr>
 </table>
 
 <script>
@@ -40,6 +39,7 @@
         }
     ];
     function sortBy(type) {
+        table1.innerHTML = '';
         switch(type){
             case 'chi':initTable('score','chinese');
                 break;
@@ -54,6 +54,10 @@
     function initTable(key1,key2) {
         var data = arr.sort(by(key1,key2));
         console.log(data)
+        var str = '<th>姓名</th><th onclick="sortBy(\'chi\')">语文</th><th onclick="sortBy(\'mat\')">数学</th><th onclick="sortBy(\'eng\')">英语</th><th onclick="sortBy(\'sum\')">总分</th>';
+        var tr = document.createElement('tr');
+        tr.innerHTML = str;
+        table1.appendChild(tr);
         for(var i=0;i<data.length;i++){
             var temp = '';
             for(var j in data[i]){
